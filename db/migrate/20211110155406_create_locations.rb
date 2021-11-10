@@ -10,6 +10,7 @@ class CreateLocations < ActiveRecord::Migration[6.1]
       t.string :hours
       t.integer :fee
       t.integer :pass
+      t.string :image
 
       t.timestamps
     end

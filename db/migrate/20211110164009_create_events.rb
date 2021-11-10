@@ -11,6 +11,7 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.string :fee
       t.string :pass
       t.string :date
+      t.string :image
 
       t.timestamps
     end
