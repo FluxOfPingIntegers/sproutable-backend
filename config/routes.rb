@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   #resources :orders
   #resources :events
   #resources :vendors
-  resources :locations
-  resources :users, except: [:index]
+  resources :locations, except: [:new, :edit]
+  resources :users, except: [:index, :new]
   resources :sessions, only: [:create]
   get "/me", to: 'sessions#autologin'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
