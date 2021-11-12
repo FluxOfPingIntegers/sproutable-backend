@@ -12,13 +12,17 @@ class UsdaApi
     response = https.request(request)
     results = JSON.parse(response.body)["results"]
 
+    locations = []
+
     results.each do |result|
       if !Location.usda_search_record_exists?(result)
         details = self.usda_id_search(result["id"])
-        Location.create_from_usda_api(result, details)
+        locations.push(Location.create_from_usda_api(result, details))
+      else
+        locations.push(Location.find_by_usda_id(result["id"]))
       end
     end
-
+    locations
   end
 
   def self.usda_id_search(usda_id)

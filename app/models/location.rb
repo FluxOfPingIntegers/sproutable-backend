@@ -17,7 +17,8 @@ class Location < ApplicationRecord
       description: details["Products"],
       address: details["Address"].split(",")[0],
       zipcode: details["Address"].split(",")[-1].to_i,
-      hours: details["Schedule"].split(" ")[3...].join(" ").split(";")[0]
+      hours: details["Schedule"].split(" ")[3...].join(" ").split(";")[0],
+      image: Image.random_veggie
     }
     Location.create(record)
   end

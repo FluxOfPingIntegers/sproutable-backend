@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   #resources :orders
   #resources :events
   #resources :vendors
-  resources :locations, except: [:new, :edit]
+  get "/locations/zip-search/:zip_code", to: 'locations#index'
+  resources :locations, only: [:create, :show, :update, :delete]
   resources :users, except: [:index, :new]
   resources :sessions, only: [:create]
   get "/me", to: 'sessions#autologin'
