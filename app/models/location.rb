@@ -8,11 +8,15 @@ class Location < ApplicationRecord
   end
 
   def self.create_from_usda_api(id_and_name, details)
-    usda_id = id_and_name["id"].to_i
-    name = 
-    address = details["Address"].split(",")[0]
-    zipcode = details["Address"].split(",")[-1]
-    byebug
+    record = {
+      usda_id: id_and_name["id"].to_i,
+      name: id_and_name["marketname"].split(" ")[1...].join(" "),
+      description: details["Products"],
+      address: details["Address"].split(",")[0],
+      zipcode: details["Address"].split(",")[-1].to_i,
+      hours: details["Schedule"].split(" ")[3...].join(" ").split(";")[0]
+    }
+    (!!Location.new(record).valid? ? Location.create(record) : false)
   end
 
 
