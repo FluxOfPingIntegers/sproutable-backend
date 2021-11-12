@@ -1,4 +1,7 @@
 class Location < ApplicationRecord
+  validates :name, :description, :address, :zipcode, presence: true
+  validates :usda_id, uniqueness: true, if: :usda_id, presence: true
+  validates :yelp_id, uniqueness: true, if: :yelp_id, presence: true
 
   has_many :events
 
@@ -16,7 +19,7 @@ class Location < ApplicationRecord
       zipcode: details["Address"].split(",")[-1].to_i,
       hours: details["Schedule"].split(" ")[3...].join(" ").split(";")[0]
     }
-    (!!Location.new(record).valid? ? Location.create(record) : false)
+    Location.create(record)
   end
 
 
