@@ -5,7 +5,8 @@ class LocationsController < ApplicationController
   end
 
   def show
-
+    location = Location.find(params[:id])
+    render json: location
   end
 
   # /locations/zip-search/:zip_code
