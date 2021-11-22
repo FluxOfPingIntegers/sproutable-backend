@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       if user.save
         render json: {user: user, token: encode_token(user.id)}
       else
-        render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+        render json: {errors: "Invalid Username and/or Password"}, status: :unprocessable_entity
       end
     end
 
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
           zipcode: user.zipcode, 
           venmoname: user.venmoname}
       else
-        render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+        render json: {errors: "Invalid Username and/or Password"}, status: :unprocessable_entity
       end
     end
 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
           zipcode: user.zipcode, 
           venmoname: user.venmoname}
       else
-        render json: {errors: user.errors.full_messages}, status: :forbidden
+        render json: {errors: "Invalid Update Entry"}, status: :forbidden
       end
     end
 
