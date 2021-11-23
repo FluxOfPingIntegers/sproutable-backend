@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  #resources :carts
-  #resources :items
-  #resources :products
-  #resources :orders
-  #resources :events
-  #resources :vendors
   get "/locations/zip-search/:zip_code", to: 'locations#index'
   resources :locations, only: [:create, :show, :update, :delete]
+  resources :locations, only: [:show] do
+    resources :events, only: [:create, :show, :update, :delete]
+  end
+
   resources :users, except: [:index, :new]
+
+  resources :vendors, except: [:index, :new]
+  resources :vendors, only: [:show] do
+    resources :products, only: [:create, :index, :update, :delete, :show]
+  end
+
   resources :sessions, only: [:create]
   get "/me", to: 'sessions#autologin'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
