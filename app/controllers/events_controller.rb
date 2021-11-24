@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   def index
     location = Location.find(params[:location_id])
+    location.updateEvents()
     events = location.events
     render json: {location: location, events: events}
   end

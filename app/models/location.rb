@@ -23,5 +23,58 @@ class Location < ApplicationRecord
     Location.create(record)
   end
 
+  def updateEvents
+    event_info = {
+      usda_id: self.usda_id,
+      yelp_id: self.yelp_id,
+      name: self.name,
+      description: self.description,
+      address: self.address,
+      zipcode: self.zipcode,
+      hours: self.hours,
+      fee: self.fee,
+      pass: self.pass,
+      date: (self.date_of_next_event.strftime),
+      image: self.image
+    }
+
+    if Date.today > self.date_of_next_event && self.date_of_next_event.strftime != self.events.last.date
+      self.events.delete_all
+      event = self.events.build(event_info)
+      event.save
+    elsif self.events.length == 0
+      event = self.events.build(event_info)
+      event.save
+    end
+  end
+
+  def date_of_next_event
+    date = Date.parse(self.hours_to_weekday)
+    delta = date > Date.today ? 0 : 7
+    date + delta
+  end
+
+  def hours_to_weekday
+    day = self.hours.split(": ")[0]
+    case day
+      when "Mon"
+        "Monday"
+      when "Tue"
+        "Tuesday"
+      when "Wed"
+        "Wednesday"
+      when "Thu"
+        "Thursday"
+      when "Fri"
+        "Friday"
+      when "Sat"
+        "Saturday"
+      when "Sun"
+        "Sunday"
+      else
+        puts "Invalid Hours Entry for #{self}"
+    end
+  end
+
 
 end
