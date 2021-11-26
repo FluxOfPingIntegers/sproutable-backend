@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_165837) do
+ActiveRecord::Schema.define(version: 2021_11_26_183826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_165837) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "stall_id"
+    t.index ["stall_id"], name: "index_items_on_stall_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -91,6 +93,15 @@ ActiveRecord::Schema.define(version: 2021_11_23_165837) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "stalls", force: :cascade do |t|
+    t.bigint "vendor_id"
+    t.bigint "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_stalls_on_event_id"
+    t.index ["vendor_id"], name: "index_stalls_on_vendor_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "name"
@@ -116,4 +127,5 @@ ActiveRecord::Schema.define(version: 2021_11_23_165837) do
   end
 
   add_foreign_key "events", "locations"
+  add_foreign_key "items", "stalls"
 end

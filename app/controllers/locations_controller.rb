@@ -1,8 +1,8 @@
 class LocationsController < ApplicationController
 
-  def create
+ # def create
 
-  end
+ # end
 
   def show
     location = Location.find(params[:id])
@@ -15,12 +15,12 @@ class LocationsController < ApplicationController
     render json: locations
   end
 
-  def update
+ # def update
 
-  end
+ # end
 
-  def delete
+ # def delete
 
-  end
+ # end
 
 end
