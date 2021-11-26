@@ -8,7 +8,8 @@ class EventsController < ApplicationController
   end
 
   def show
-
+    event = Event.find(params[:id])
+    render json: {event: event, vendors: event.vendors, items: event.items}
   end
 
   def update
