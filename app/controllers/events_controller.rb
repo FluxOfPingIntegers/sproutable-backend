@@ -7,10 +7,6 @@ class EventsController < ApplicationController
     render json: {location: location, events: events}
   end
 
-  def create
-
-  end
-
   def show
 
   end
