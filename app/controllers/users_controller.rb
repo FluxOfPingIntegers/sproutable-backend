@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     def create
       user = User.new(user_params)
       if user.save
-        render json: {user: user, token: encode_token(user.id)}
+        render json: {user: user, token: encode_token(user.id), vendor: (!!user.vendor ? user.vendor : false)}
       else
         render json: {errors: "Invalid Username and/or Password"}, status: :unprocessable_entity
       end
@@ -19,7 +19,8 @@ class UsersController < ApplicationController
           email: user.email, 
           image: user.image, 
           zipcode: user.zipcode, 
-          venmoname: user.venmoname}
+          venmoname: user.venmoname,
+          vendor: (!!user.vendor ? user.vendor : false)}
       else
         render json: {errors: "Invalid Username and/or Password"}, status: :unprocessable_entity
       end
@@ -34,7 +35,8 @@ class UsersController < ApplicationController
           email: user.email, 
           image: user.image, 
           zipcode: user.zipcode, 
-          venmoname: user.venmoname}
+          venmoname: user.venmoname,
+          vendor: (!!user.vendor ? user.vendor : false)}
       else
         render json: {errors: "Invalid Update Entry"}, status: :forbidden
       end
