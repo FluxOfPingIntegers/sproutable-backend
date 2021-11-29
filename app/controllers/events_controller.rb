@@ -9,7 +9,10 @@ class EventsController < ApplicationController
 
   def show
     event = Event.find(params[:id])
-    render json: {event: event, vendors: event.vendors, items: event.items}
+    render json: {
+      event: event, 
+      vendors: event.vendors,
+      items: event.items}
   end
 
   def update
