@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
   end
 
   def autologin
-    render json: {user: logged_in_user, token: encode_token(logged_in_user.id), vendor: (!!logged_in_user.vendor ? user.vendor : false)}
+    user = logged_in_user
+    vendor = (!!user.vendor ? user.vendor : false)
+    render json: {user: user, token: encode_token(user.id), vendor: vendor}
   end
 
 end

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     def show
       user = (!!logged_in_user ? logged_in_user : User.find_by(username: user_params[:username])&.authenticate(user_params[:password]))
-      puts "The User in user#show is=#{user}"
+      vendor = (!!user.vendor ? user.vendor : false)
       if !!user
         render json: {
           username: user.username, 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
           image: user.image, 
           zipcode: user.zipcode, 
           venmoname: user.venmoname,
-          vendor: (!!user.vendor ? user.vendor : false)}
+          vendor: vendor}
       else
         render json: {errors: "Invalid Username and/or Password"}, status: :unprocessable_entity
       end
