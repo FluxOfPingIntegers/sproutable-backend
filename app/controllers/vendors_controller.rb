@@ -2,20 +2,51 @@ class VendorsController < ApplicationController
   
   def create
     user = logged_in_user
-    if !!user.vendor.build(vendor_params)
-      vendor = user.vendor.create(vendor_params)
-      render json: vendor
+    if !!user.build_vendor(vendor_params)
+      vendor = user.create_vendor(vendor_params)
+      render json: {
+        id: vendor.id,
+        username: vendor.username,
+        name: vendor.name,
+        email: vendor.email,
+        image: vendor.image,
+        zipcode: vendor.zipcode,
+        venmoname: vendor.venmoname,
+        website: vendor.website,
+        user_id: vendor.user_id
+      }
     end
   end
 
   def show
     vendor = Vendor.find(params[:id])
-    render json: vendor
+    render json: {
+      id: vendor.id,
+      username: vendor.username,
+      name: vendor.name,
+      email: vendor.email,
+      image: vendor.image,
+      zipcode: vendor.zipcode,
+      venmoname: vendor.venmoname,
+      website: vendor.website,
+      user_id: vendor.user_id
+    }
   end
 
   def update
     if !!logged_in_user && logged_in_user.vendor.update(vendor_params)
-      rendor json: logged_in_user.vendor
+      vendor = logged_in_user.vendor
+      rendor json: {
+        id: vendor.id,
+        username: vendor.username,
+        name: vendor.name,
+        email: vendor.email,
+        image: vendor.image,
+        zipcode: vendor.zipcode,
+        venmoname: vendor.venmoname,
+        website: vendor.website,
+        user_id: vendor.user_id
+      }
     else
       rendor json: {errors: "Invalid Update Entry"}, status: :forbidden
     end
@@ -28,7 +59,7 @@ class VendorsController < ApplicationController
   private
 
   def vendor_params
-    params.permit(:username, :name, :email, :zipcode, :venmoname, :image, :website)
+    params.require(:vendor).permit(:username, :name, :email, :zipcode, :venmoname, :image, :website)
   end
 
 end

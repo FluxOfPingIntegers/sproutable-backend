@@ -37,8 +37,8 @@ class Location < ApplicationRecord
       date: (self.date_of_next_event.strftime),
       image: self.image
     }
-
-    if Date.today < self.date_of_next_event && self.date_of_next_event.strftime != self.events.last.date
+    future_event = (!!self.events.last ? self.events.last.date : false)
+    if Date.today < self.date_of_next_event && self.date_of_next_event.strftime != future_event
       self.events.delete_all
       event = self.events.build(event_info)
       event.save
