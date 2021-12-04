@@ -13,6 +13,7 @@ class VendorsController < ApplicationController
         zipcode: vendor.zipcode,
         venmoname: vendor.venmoname,
         website: vendor.website,
+        products: vendor.products,
         user_id: vendor.user_id
       }
     end
@@ -29,6 +30,7 @@ class VendorsController < ApplicationController
       zipcode: vendor.zipcode,
       venmoname: vendor.venmoname,
       website: vendor.website,
+      products: vendor.products,
       user_id: vendor.user_id
     }
   end
@@ -45,6 +47,7 @@ class VendorsController < ApplicationController
         zipcode: vendor.zipcode,
         venmoname: vendor.venmoname,
         website: vendor.website,
+        products: vendor.products,
         user_id: vendor.user_id
       }
     else
