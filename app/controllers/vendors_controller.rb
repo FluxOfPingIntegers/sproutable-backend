@@ -36,7 +36,7 @@ class VendorsController < ApplicationController
   def update
     if !!logged_in_user && logged_in_user.vendor.update(vendor_params)
       vendor = logged_in_user.vendor
-      rendor json: {
+      render json: {
         id: vendor.id,
         username: vendor.username,
         name: vendor.name,
