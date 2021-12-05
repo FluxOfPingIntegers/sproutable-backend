@@ -15,12 +15,4 @@ class EventsController < ApplicationController
       items: event.items}
   end
 
-  def update
-
-  end
-
-  def delete
-
-  end
-
 end

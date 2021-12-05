@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     byebug
   end
 
-  def delete
+  def destroy
     byebug
   end
 

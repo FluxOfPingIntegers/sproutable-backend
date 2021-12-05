@@ -4,52 +4,19 @@ class VendorsController < ApplicationController
     user = logged_in_user
     if !!user.build_vendor(vendor_params)
       vendor = user.create_vendor(vendor_params)
-      render json: {
-        id: vendor.id,
-        username: vendor.username,
-        name: vendor.name,
-        email: vendor.email,
-        image: vendor.image,
-        zipcode: vendor.zipcode,
-        venmoname: vendor.venmoname,
-        website: vendor.website,
-        products: vendor.products,
-        user_id: vendor.user_id
-      }
+      render json: vendor.display
     end
   end
 
   def show
     vendor = Vendor.find(params[:id])
-    render json: {
-      id: vendor.id,
-      username: vendor.username,
-      name: vendor.name,
-      email: vendor.email,
-      image: vendor.image,
-      zipcode: vendor.zipcode,
-      venmoname: vendor.venmoname,
-      website: vendor.website,
-      products: vendor.products,
-      user_id: vendor.user_id
-    }
+    render json: vendor.display
   end
 
   def update
     if !!logged_in_user && logged_in_user.vendor.update(vendor_params)
       vendor = logged_in_user.vendor
-      render json: {
-        id: vendor.id,
-        username: vendor.username,
-        name: vendor.name,
-        email: vendor.email,
-        image: vendor.image,
-        zipcode: vendor.zipcode,
-        venmoname: vendor.venmoname,
-        website: vendor.website,
-        products: vendor.products,
-        user_id: vendor.user_id
-      }
+      render json: vendor.display
     else
       rendor json: {errors: "Invalid Update Entry"}, status: :forbidden
     end

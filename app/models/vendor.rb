@@ -16,6 +16,7 @@ class Vendor < ApplicationRecord
       zipcode: self.zipcode,
       venmoname: self.venmoname,
       website: self.website,
+      products: self.products,
       user_id: self.user_id
     }
   end

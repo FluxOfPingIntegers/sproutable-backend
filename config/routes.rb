@@ -2,14 +2,14 @@ Rails.application.routes.draw do
   get "/locations/zip-search/:zip_code", to: 'locations#index'
 #  resources :locations, only: [:create, :update, :delete]
   resources :locations, only: [:show] do
-    resources :events, only: [:index, :show, :update, :delete]
+    resources :events, only: [:index, :show]
   end
 
   resources :users, except: [:index, :new]
 
   resources :vendors, except: [:index, :new, :edit]
   resources :vendors, only: [:show] do
-    resources :products, only: [:create, :index, :update, :delete, :show]
+    resources :products, only: [:create, :index, :update, :destroy, :show]
   end
 
   resources :sessions, only: [:create]
