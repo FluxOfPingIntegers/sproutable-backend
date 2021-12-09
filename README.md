@@ -4,11 +4,11 @@ This is a RESTful API serving JSON data to a web app frontend that can be found 
 
 ## Getting Started
 
-• Step 1: within your terminal inside the main branch for this project within VS code type
+• Step 1: within your terminal inside the main branch for this project within VS code type the following and hit enter:
 ```bash
 bundle update
 ```
-and press enter. Then type
+This updates all the dependencies required to run your ruby application, to apply these updates type:
 ```bash
 bundle install
 ```
