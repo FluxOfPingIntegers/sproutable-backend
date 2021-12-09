@@ -14,11 +14,11 @@ bundle install
 ```
 and hit enter again.
 
-• Step 2: Again within your terminal inside the main branch for this project within VS code type
+• Step 2: Again within your terminal inside the main branch for this project within VS code enter
 ```bash
 rails db:seed
 ```
-to populate your database, then
+this populates your database, then enter
 ```bash
 rails s 
 ```
