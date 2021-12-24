@@ -7,6 +7,10 @@ class EventsController < ApplicationController
     render json: {location: location, events: events}
   end
 
+  def list
+    byebug
+  end
+
   def show
     event = Event.find(params[:id])
     render json: {
