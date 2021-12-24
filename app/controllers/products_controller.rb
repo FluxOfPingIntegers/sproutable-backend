@@ -7,9 +7,9 @@ class ProductsController < ApplicationController
   def create
     user = logged_in_user
     vendor = Vendor.find(params[:vendor_id])
-    if user.vendor == Vendor.find(params[:vendor_id]) && user.vendor.products.build(product_params).valid?
+    if user.vendor == vendor && user.vendor.products.build(product_params).valid?
       user.vendor.products.create(product_params)
-      render json: user.vendor.display
+      render json: vendor.display
     else
       render json: {errors: "Invalid Product Creation Attempted"}, status: :unprocessable_entity
     end
