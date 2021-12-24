@@ -29,7 +29,15 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    byebug
+    user = logged_in_user
+    vendor = Vendor.find(params[:vendor_id])
+    product = Product.find(params[:id])
+    if !!user && !!vendor && !!product && user.vendor == vendor && product.vendor == vendor
+      product.destroy
+      render json: vendor.display
+    else
+      render json: {errors: "Invalid product delete attempt"}, status: :unprocessable_entity
+    end
   end
 
   private
