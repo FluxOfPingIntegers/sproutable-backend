@@ -8,7 +8,16 @@ class EventsController < ApplicationController
   end
 
   def list
-    byebug
+    locations = UsdaApi.zip_search(params[:zip_code])
+    events = locations.map do |location|
+      location.updateEvents
+      location.events
+    end
+    if !!events
+      render json: {events: events}
+    else
+      render json: {errors: "Invalid zipcode request"}, status: :unprocessable_entity
+    end
   end
 
   def show
