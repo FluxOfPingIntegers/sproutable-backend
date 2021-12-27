@@ -11,11 +11,8 @@ Rails.application.routes.draw do
   resources :vendors, only: [:show] do
     resources :products, only: [:create, :index, :update, :destroy, :show]
   end
-  resources :vendors, only: [:show] do
-    resources :events, only: [:show] do
-      resources :stalls, only: [:create]
-    end
-  end
+
+  resources :stalls, only: [:create]
 
   resources :sessions, only: [:create]
   get "/me", to: 'sessions#autologin'
