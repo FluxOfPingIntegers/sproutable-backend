@@ -25,7 +25,8 @@ class EventsController < ApplicationController
     render json: {
       event: event, 
       vendors: event.vendors,
-      items: event.items}
+      items: event.products
+    }
   end
 
 end

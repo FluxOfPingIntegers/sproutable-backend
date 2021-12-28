@@ -1,18 +1,20 @@
 class StallsController < ApplicationController
 
   def create
-    byebug
-=begin
     if !!logged_in_user.vendor
-      user = logged_in_user
-      vendor = user.vendor
-      event = Event.find(params[:id])
-      Stall.create(vendor_id: vendor.id, event_id: event.id, date: event.date)
+      vendor = logged_in_user.vendor
+      event_id_list = stall_form_params.map {|param| param[:event_id]}
+      Stall.process_form({event_id_list: event_id_list, vendor_id: vendor.id})
       render json: vendor.display
     else
-      render json: {errors: "Invalid action."}, status: :unprocessable_entity
+      render json: {errors: "Invalid stall creation attempt"}, status: :unprocessable_entity
     end
-=end
+  end
+
+  private
+
+  def stall_form_params
+    params.require(:stalls)
   end
 
 end
