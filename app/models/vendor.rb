@@ -18,7 +18,7 @@ class Vendor < ApplicationRecord
       venmoname: self.venmoname,
       website: self.website,
       products: self.products,
-      stalls: self.stalls,
+      stalls: self.current_stalls,
       user_id: self.user_id
     }
   end
@@ -32,4 +32,9 @@ class Vendor < ApplicationRecord
     end
     return stalls
   end
+
+  def current_stalls
+    self.stalls.select {|stall| Date.parse(stall.date) > Date.today }
+  end
+  
 end
