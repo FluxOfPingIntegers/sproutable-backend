@@ -18,12 +18,13 @@ class StallsController < ApplicationController
       if !!Stall.find_by(vendor_id: vendor.id, event_id: event.id)
         stall = Stall.find_by(vendor_id: vendor.id, event_id: event.id)
         stall.destroy
-        render json: {success: true}
+        render json: vendor.display
       else
         render json: {errors: "No stall found for that vendor/event"}, status: :unprocessable_entity
       end
+    else
+      render json: {errors: "Invalid stall deletion attempt"}, status: :forbidden
     end
-    render json: {errors: "Invalid stall deletion attempt"}, status: :forbidden
   end
 
 end
