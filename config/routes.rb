@@ -16,7 +16,10 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create]
   get "/me", to: 'sessions#autologin'
+
   get "/zip-search/:zip_code/events", to: 'events#list'
+
+  delete "/events/:id/stalls", to: 'stalls#destroy'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
