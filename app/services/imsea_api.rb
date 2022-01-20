@@ -3,7 +3,7 @@ require 'net/http'
 class ImseaApi
 
   def self.populate_images
-    url = URI("https://imsea.herokuapp.com/api/1?q=vegetables")
+    url = URI("https://imsea.herokuapp.com/api/1?q=farmersmarket")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
